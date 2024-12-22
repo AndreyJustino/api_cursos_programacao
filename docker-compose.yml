@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  postgree:
+    image: postgres
+    container_name: api_cursos_programacao
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=api_cursos_programacao
