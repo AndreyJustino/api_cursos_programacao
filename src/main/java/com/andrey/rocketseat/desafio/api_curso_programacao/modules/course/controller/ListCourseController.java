@@ -31,7 +31,7 @@ public class ListCourseController {
 
         } catch (Exception e) {
 
-            e.getMessage();
+            e.printStackTrace();
 
             return ResponseEntity.badRequest().body(e.getMessage());
         }

@@ -24,7 +24,7 @@ public class CreateCourseController {
             return ResponseEntity.ok().body(result);
         } catch (Exception e) {
 
-            e.getMessage();
+            e.printStackTrace();
 
             return ResponseEntity.badRequest().body(e.getMessage());
         }
