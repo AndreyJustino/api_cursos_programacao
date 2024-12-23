@@ -7,11 +7,11 @@ public enum Status {
     DESATIVADO;
 
     @JsonCreator
-    public static Status empty(String level){
-        if (level == null || level.trim().isEmpty()){
+    public static Status empty(String status){
+        if (status == null || status.trim().isEmpty()){
             return null;
         }
 
-        return Status.valueOf(level.toUpperCase());
+        return Status.valueOf(status.toUpperCase());
     }
 }
