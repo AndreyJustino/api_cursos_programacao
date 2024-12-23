@@ -1,6 +1,7 @@
 package com.andrey.rocketseat.desafio.api_curso_programacao.modules.course.controller;
 
 import com.andrey.rocketseat.desafio.api_curso_programacao.modules.course.CourseEntity;
+import com.andrey.rocketseat.desafio.api_curso_programacao.modules.course.dto.MessageReturnDTO;
 import com.andrey.rocketseat.desafio.api_curso_programacao.modules.course.service.ListCourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,13 @@ public class ListCourseController {
     private ListCourseService listCourseService;
 
     @GetMapping("/")
-    public ResponseEntity<List<CourseEntity>> listCourseController(){
-        return ResponseEntity.ok().body(listCourseService.execute());
+    public ResponseEntity<MessageReturnDTO> listCourseController(){
+
+        MessageReturnDTO messageReturnDTO = MessageReturnDTO.builder()
+                .message("Todos os cursos cadastrados.")
+                .object(listCourseService.execute())
+                .build();
+
+        return ResponseEntity.ok().body(messageReturnDTO);
     }
 }
