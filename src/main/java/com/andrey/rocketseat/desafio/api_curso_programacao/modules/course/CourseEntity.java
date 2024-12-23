@@ -8,9 +8,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Data
 @Entity(name = "course")
+@DynamicUpdate
 public class CourseEntity {
     
     @Id
@@ -29,6 +32,7 @@ public class CourseEntity {
 
     @CreationTimestamp
     private LocalDateTime created_at;
-    
+
+    @UpdateTimestamp
     private LocalDateTime updated_at;
 }
