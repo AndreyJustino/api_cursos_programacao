@@ -17,13 +17,13 @@ public class CourseEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @NotBlank(message = "O campo (nome) não deve esta vazio")
+    @NotBlank(message = "O campo (nome) não deve estar vazio")
     private String name;
 
     @NotBlank(message = "O campo (categoria) não deve estar vazio")
     private String category;
 
-    @NotNull
+    @NotNull(message = "O campo (status) não deve estar vazio")
     @Enumerated(EnumType.STRING)
     private Status status;
 
