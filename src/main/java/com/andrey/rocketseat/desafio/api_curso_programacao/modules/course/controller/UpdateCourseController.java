@@ -33,7 +33,7 @@ public class UpdateCourseController {
         } catch (Exception e) {
             e.getMessage();
 
-            throw new RuntimeException(e);
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 }

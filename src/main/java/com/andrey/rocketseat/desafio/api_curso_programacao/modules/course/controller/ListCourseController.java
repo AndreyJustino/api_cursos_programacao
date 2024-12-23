@@ -19,13 +19,22 @@ public class ListCourseController {
     private ListCourseService listCourseService;
 
     @GetMapping("/")
-    public ResponseEntity<MessageReturnDTO> listCourseController(){
+    public ResponseEntity<Object> listCourseController(){
 
-        MessageReturnDTO messageReturnDTO = MessageReturnDTO.builder()
-                .message("Todos os cursos cadastrados.")
-                .object(listCourseService.execute())
-                .build();
+        try{
+            MessageReturnDTO messageReturnDTO = MessageReturnDTO.builder()
+                    .message("Todos os cursos cadastrados.")
+                    .object(listCourseService.execute())
+                    .build();
 
-        return ResponseEntity.ok().body(messageReturnDTO);
+            return ResponseEntity.ok().body(messageReturnDTO);
+
+        } catch (Exception e) {
+
+            e.getMessage();
+
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+
     }
 }
