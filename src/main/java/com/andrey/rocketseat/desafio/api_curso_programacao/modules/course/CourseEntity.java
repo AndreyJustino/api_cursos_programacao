@@ -1,6 +1,5 @@
 package com.andrey.rocketseat.desafio.api_curso_programacao.modules.course;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
