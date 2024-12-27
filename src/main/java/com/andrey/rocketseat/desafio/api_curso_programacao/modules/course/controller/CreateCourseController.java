@@ -3,6 +3,11 @@ package com.andrey.rocketseat.desafio.api_curso_programacao.modules.course.contr
 import com.andrey.rocketseat.desafio.api_curso_programacao.modules.course.CourseEntity;
 import com.andrey.rocketseat.desafio.api_curso_programacao.modules.course.dto.MessageReturnDTO;
 import com.andrey.rocketseat.desafio.api_curso_programacao.modules.course.service.CreateCourseService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +21,11 @@ public class CreateCourseController {
     private CreateCourseService createCourseService;
 
     @PostMapping("/")
+    @Tag(name = "Cadastrar - Curso", description = "Endpoint responsavel por cadastrar curso")
+    @Operation(summary = "Cadastrar curso", description = "Realiza cadastro de um novo curso, armazenando seus dados no banco de dados")
+    @ApiResponse(responseCode = "200", content = {
+            @Content(schema = @Schema(implementation = MessageReturnDTO.class))
+    })
     public ResponseEntity<Object> createCourse(@Valid @RequestBody CourseEntity courseEntity){
         try{
 

@@ -3,6 +3,12 @@ package com.andrey.rocketseat.desafio.api_curso_programacao.modules.course.contr
 import com.andrey.rocketseat.desafio.api_curso_programacao.modules.course.CourseEntity;
 import com.andrey.rocketseat.desafio.api_curso_programacao.modules.course.dto.MessageReturnDTO;
 import com.andrey.rocketseat.desafio.api_curso_programacao.modules.course.service.ListCourseService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +25,11 @@ public class ListCourseController {
     private ListCourseService listCourseService;
 
     @GetMapping("/")
+    @Tag(name = "Listar - cursos", description = "Vai listar todos os cursos cadastrados.")
+    @Operation(summary = "Listar cursos cadastrados", description = "Vai listar todos os cursos cadastrados no banco de dados")
+    @ApiResponse(responseCode = "200", content = {
+            @Content(array = @ArraySchema(schema = @Schema(implementation = MessageReturnDTO.class)) )
+    })
     public ResponseEntity<Object> listCourseController(){
 
         try{
