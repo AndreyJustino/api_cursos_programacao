@@ -9,7 +9,13 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableMethodSecurity
 public class SecurityConfig {
-    
+
+    private static final String[] SWAGGER_LIST = {
+            "/swagger-ui/**",
+            "/v3/api-docs/**",
+            "/swagger-resources/**"
+    };
+
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.csrf((value) -> value.disable())
@@ -17,6 +23,7 @@ public class SecurityConfig {
                 auth.requestMatchers("/cursos/").permitAll()
                      .requestMatchers("/cursos/{id}").permitAll()
                      .requestMatchers("/cursos/{id}/{status}").permitAll()
+                     .requestMatchers(SWAGGER_LIST).permitAll()
                      .anyRequest().authenticated();
             });
         
