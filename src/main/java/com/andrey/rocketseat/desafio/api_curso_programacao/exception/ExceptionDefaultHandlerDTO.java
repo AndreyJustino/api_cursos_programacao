@@ -1,4 +1,4 @@
-package com.andrey.rocketseat.desafio.api_curso_programacao.modules.exception;
+package com.andrey.rocketseat.desafio.api_curso_programacao.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
