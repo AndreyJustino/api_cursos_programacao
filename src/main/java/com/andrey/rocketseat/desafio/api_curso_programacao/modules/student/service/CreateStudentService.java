@@ -5,12 +5,16 @@ import com.andrey.rocketseat.desafio.api_curso_programacao.modules.student.Stude
 import com.andrey.rocketseat.desafio.api_curso_programacao.modules.student.dto.CreateStudentDTO;
 import com.andrey.rocketseat.desafio.api_curso_programacao.modules.student.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CreateStudentService {
     @Autowired
     private StudentRepository studentRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public StudentEntity execute(CreateStudentDTO createStudentDTO){
         this.studentRepository.findByEmailOrUsername(createStudentDTO.getEmail(), createStudentDTO.getUsername())
@@ -19,11 +23,13 @@ public class CreateStudentService {
             }
         );
 
+        String password = passwordEncoder.encode(createStudentDTO.getPassword());
+
         StudentEntity student = StudentEntity.builder()
                 .name(createStudentDTO.getName())
                 .username(createStudentDTO.getUsername())
                 .email(createStudentDTO.getEmail())
-                .password(createStudentDTO.getPassword())
+                .password(password)
                 .build();
 
         StudentEntity result = this.studentRepository.save(student);

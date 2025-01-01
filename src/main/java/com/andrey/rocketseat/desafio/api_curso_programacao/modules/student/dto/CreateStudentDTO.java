@@ -21,7 +21,7 @@ public class CreateStudentDTO {
     @Schema(example = "andrey@gmail.com", requiredMode = Schema.RequiredMode.REQUIRED)
     private String email;
 
-    @Length(max = 16, min = 8, message = "A senha deve ter entre 8 e 16 carateres")
+    @Length(max = 70, min = 8, message = "A senha deve ter no minimo 8 carateres")
     @Schema(example = "12345678", requiredMode = Schema.RequiredMode.REQUIRED)
     private String password;
 }
