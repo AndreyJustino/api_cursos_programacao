@@ -21,6 +21,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/cursos")
+@Tag(name = "Curso")
 public class ListCourseController {
 
     @Autowired
@@ -29,7 +30,6 @@ public class ListCourseController {
     @GetMapping("/")
     @PreAuthorize("hasRole('STUDENT')")
     @SecurityRequirement(name = "JWT_Auth")
-    @Tag(name = "Listar - cursos", description = "Vai listar todos os cursos cadastrados.")
     @Operation(summary = "Listar cursos cadastrados", description = "Vai listar todos os cursos cadastrados no banco de dados")
     @ApiResponse(responseCode = "200", content = {
             @Content(array = @ArraySchema(schema = @Schema(implementation = MessageReturnDTO.class)) )

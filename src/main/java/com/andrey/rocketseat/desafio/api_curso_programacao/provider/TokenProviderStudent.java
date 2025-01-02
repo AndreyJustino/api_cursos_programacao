@@ -1,4 +1,4 @@
-package com.andrey.rocketseat.desafio.api_curso_programacao.modules.provider;
+package com.andrey.rocketseat.desafio.api_curso_programacao.provider;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

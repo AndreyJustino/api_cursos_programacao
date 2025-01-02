@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/cursos")
+@Tag(name = "Curso")
 public class CreateCourseController {
 
     @Autowired
     private CreateCourseService createCourseService;
 
     @PostMapping("/")
-    @Tag(name = "Cadastrar - Curso", description = "Endpoint responsavel por cadastrar curso")
     @Operation(summary = "Cadastrar curso", description = "Realiza cadastro de um novo curso, armazenando seus dados no banco de dados")
     @ApiResponse(responseCode = "200", content = {
             @Content(schema = @Schema(implementation = MessageReturnDTO.class))

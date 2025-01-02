@@ -18,12 +18,12 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/cursos")
+@Tag(name = "Curso")
 public class UpdateCourseController {
     @Autowired
     private UpdateCourseService updateCourseService;
 
     @PutMapping("/{id}")
-    @Tag(name = "Atualizar - Curso", description = "Atualizar curso ja cadastrado.")
     @Operation(summary = "Vai atualizar os dados do curso.", description = "Vai atualizar os dados do curso que ja foi cadastrado anteriormente no banco de dados.")
     @ApiResponse(responseCode = "200", content = {
             @Content(schema = @Schema(implementation = MessageReturnDTO.class))

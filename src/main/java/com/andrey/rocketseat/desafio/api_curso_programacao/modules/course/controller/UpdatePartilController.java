@@ -17,12 +17,12 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/cursos")
+@Tag(name = "Curso")
 public class UpdatePartilController {
     @Autowired
     private UpdatePartilService updatePartilService;
 
     @PatchMapping("/{id}/{status}")
-    @Tag(name = "Atualizar - Status", description = "Atualizar status de acordo com ID")
     @Operation(summary = "Atualizara status do curso", description = "Atualizara status de um curso pelo ID fornecido pela URL, assim como o status (ativados e desativado) tambem fornecido pela URL")
     @ApiResponse(responseCode = "200", content = {
             @Content(schema = @Schema(implementation = MessageReturnDTO.class))

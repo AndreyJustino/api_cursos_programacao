@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/student")
-@Tag(name = "Autenticar - Estudante")
+@Tag(name = "Estudante")
 public class AuthStudentController {
 
     @Autowired

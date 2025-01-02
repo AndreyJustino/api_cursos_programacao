@@ -18,12 +18,12 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/cursos")
+@Tag(name = "Curso")
 public class DeleteCourseController {
     @Autowired
     private DeleteCourseService deleteCourseService;
 
     @DeleteMapping("/{id}")
-    @Tag(name = "Deletar - Curso", description = "Endpoint responsavel por deletar curso.")
     @Operation(summary = "Remover curso", description = "Vai realizara a remocao do curso do banco de dados, de acordo com o ID fornecido.")
     @ApiResponse(responseCode = "200", content = {
             @Content(schema = @Schema(example = "Curso deletado com sucesso!"))

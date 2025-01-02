@@ -1,6 +1,6 @@
 package com.andrey.rocketseat.desafio.api_curso_programacao.security;
 
-import com.andrey.rocketseat.desafio.api_curso_programacao.modules.provider.TokenProviderStudent;
+import com.andrey.rocketseat.desafio.api_curso_programacao.provider.TokenProviderStudent;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
