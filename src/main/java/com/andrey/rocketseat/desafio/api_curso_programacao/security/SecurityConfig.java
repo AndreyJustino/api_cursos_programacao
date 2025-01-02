@@ -28,11 +28,12 @@ public class SecurityConfig {
         httpSecurity.csrf((value) -> value.disable())
             .authorizeHttpRequests((auth) -> {
                 auth.requestMatchers("/cursos/{id}").permitAll()
-                     .requestMatchers("/cursos/{id}/{status}").permitAll()
-                     .requestMatchers("/student/register").permitAll()
-                     .requestMatchers("/student/auth").permitAll()
-                     .requestMatchers(SWAGGER_LIST).permitAll()
-                     .anyRequest().authenticated();
+                        .requestMatchers("/cursos/{id}/{status}").permitAll()
+                        .requestMatchers("/student/register").permitAll()
+                        .requestMatchers("/student/auth").permitAll()
+                        .requestMatchers("/teacher/register").permitAll()
+                        .requestMatchers(SWAGGER_LIST).permitAll()
+                        .anyRequest().authenticated();
             }).addFilterBefore(securityFilterStudent, BasicAuthenticationFilter.class);
         
         return httpSecurity.build();
