@@ -1,8 +1,8 @@
 package com.andrey.rocketseat.desafio.api_curso_programacao.modules.student.controller;
 
-import com.andrey.rocketseat.desafio.api_curso_programacao.modules.student.StudentEntity;
-import com.andrey.rocketseat.desafio.api_curso_programacao.modules.student.dto.CreateStudentDTO;
-import com.andrey.rocketseat.desafio.api_curso_programacao.modules.student.service.CreateStudentService;
+import com.andrey.rocketseat.desafio.api_curso_programacao.modules.student.dto.AuthStudentResponseDTO;
+import com.andrey.rocketseat.desafio.api_curso_programacao.modules.student.dto.AuthStundentDTO;
+import com.andrey.rocketseat.desafio.api_curso_programacao.modules.student.service.AuthStudentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -18,23 +18,25 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/student")
-@Tag(name = "Cadastrar - Estudante")
-public class CreateStudentController {
+@Tag(name = "Autenticar - Estudante")
+public class AuthStudentController {
 
     @Autowired
-    private CreateStudentService createStudentService;
+    private AuthStudentService authStudentService;
 
-    @PostMapping("/register")
-    @Operation(summary = "Cadastrar estudante", description = "Este endpoint realizara o cadastro do estundante e armazenara os dados dele no banco de dados")
+    @PostMapping("/auth")
+    @Operation(summary = "Autenticar estudante", description = "Este endpoint é responsavel por autenticar as credenciais do usuario e retornar um token JWT")
     @ApiResponse(responseCode = "200", content = {
-            @Content(schema = @Schema(implementation = StudentEntity.class))
+            @Content(schema = @Schema(implementation = AuthStudentResponseDTO.class))
     })
-    public ResponseEntity<Object> createStudent(@Valid @RequestBody CreateStudentDTO createStudentDTO){
+    public ResponseEntity<Object> authStudentController(@Valid @RequestBody AuthStundentDTO authStundentDTO){
         try {
-            StudentEntity result = this.createStudentService.execute(createStudentDTO);
+
+            AuthStudentResponseDTO result = this.authStudentService.execute(authStundentDTO);
 
             return ResponseEntity.ok().body(result);
-        }catch (Exception e){
+
+        } catch (Exception e) {
             e.printStackTrace();
 
             return ResponseEntity.badRequest().body(e.getMessage());

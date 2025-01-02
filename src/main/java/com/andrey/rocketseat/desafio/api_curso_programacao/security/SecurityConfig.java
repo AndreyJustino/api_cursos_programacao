@@ -26,6 +26,7 @@ public class SecurityConfig {
                      .requestMatchers("/cursos/{id}").permitAll()
                      .requestMatchers("/cursos/{id}/{status}").permitAll()
                      .requestMatchers("/student/register").permitAll()
+                     .requestMatchers("/student/auth").permitAll()
                      .requestMatchers(SWAGGER_LIST).permitAll()
                      .anyRequest().authenticated();
             });
