@@ -8,9 +8,11 @@ import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +27,8 @@ public class ListCourseController {
     private ListCourseService listCourseService;
 
     @GetMapping("/")
+    @PreAuthorize("hasRole('STUDENT')")
+    @SecurityRequirement(name = "JWT_Auth")
     @Tag(name = "Listar - cursos", description = "Vai listar todos os cursos cadastrados.")
     @Operation(summary = "Listar cursos cadastrados", description = "Vai listar todos os cursos cadastrados no banco de dados")
     @ApiResponse(responseCode = "200", content = {
