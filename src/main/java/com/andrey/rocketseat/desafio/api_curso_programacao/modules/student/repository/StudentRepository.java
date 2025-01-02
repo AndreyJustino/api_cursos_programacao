@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface StudentRepository extends JpaRepository<StudentEntity, UUID> {
-    Optional<StudentEntity> findByEmailAndPassword(String email, String password);
     Optional<StudentEntity> findByEmailOrUsername(String email, String username);
+
+    Optional<StudentEntity> findByEmail(String email);
 }
