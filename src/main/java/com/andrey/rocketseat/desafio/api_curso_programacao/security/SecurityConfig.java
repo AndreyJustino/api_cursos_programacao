@@ -32,6 +32,7 @@ public class SecurityConfig {
                         .requestMatchers("/student/register").permitAll()
                         .requestMatchers("/student/auth").permitAll()
                         .requestMatchers("/teacher/register").permitAll()
+                        .requestMatchers("/teacher/auth").permitAll()
                         .requestMatchers(SWAGGER_LIST).permitAll()
                         .anyRequest().authenticated();
             }).addFilterBefore(securityFilterStudent, BasicAuthenticationFilter.class);
