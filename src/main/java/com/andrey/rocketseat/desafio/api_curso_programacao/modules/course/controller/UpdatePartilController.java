@@ -8,9 +8,11 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -23,6 +25,8 @@ public class UpdatePartilController {
     private UpdatePartilService updatePartilService;
 
     @PatchMapping("/{id}/{status}")
+    @PreAuthorize("hasRole('TEACHER')")
+    @SecurityRequirement(name = "JWT_Auth")
     @Operation(summary = "Atualizara status do curso", description = "Atualizara status de um curso pelo ID fornecido pela URL, assim como o status (ativados e desativado) tambem fornecido pela URL")
     @ApiResponse(responseCode = "200", content = {
             @Content(schema = @Schema(implementation = MessageReturnDTO.class))

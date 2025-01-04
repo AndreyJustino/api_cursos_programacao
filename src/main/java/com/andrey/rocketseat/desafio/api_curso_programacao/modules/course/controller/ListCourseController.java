@@ -28,7 +28,7 @@ public class ListCourseController {
     private ListCourseService listCourseService;
 
     @GetMapping("/")
-    @PreAuthorize("hasRole('STUDENT')")
+    @PreAuthorize("hasRole('STUDENT') or hasRole('TEACHER')")
     @SecurityRequirement(name = "JWT_Auth")
     @Operation(summary = "Listar cursos cadastrados", description = "Vai listar todos os cursos cadastrados no banco de dados")
     @ApiResponse(responseCode = "200", content = {

@@ -7,10 +7,12 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,6 +24,8 @@ public class CreateCourseController {
     private CreateCourseService createCourseService;
 
     @PostMapping("/")
+    @PreAuthorize("hasRole('TEACHER')")
+    @SecurityRequirement(name = "JWT_Auth")
     @Operation(summary = "Cadastrar curso", description = "Realiza cadastro de um novo curso, armazenando seus dados no banco de dados")
     @ApiResponse(responseCode = "200", content = {
             @Content(schema = @Schema(implementation = MessageReturnDTO.class))
