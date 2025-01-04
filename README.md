@@ -2,6 +2,66 @@
 
 Este projeto é uma API fictícia desenvolvida para gerenciar cursos de programação. Ele foi criado como parte de um desafio técnico, utilizando o framework Spring Boot. A API permite realizar operações básicas de CRUD e oferece funcionalidades específicas para ativar/desativar cursos.
 
+# Documentação da API com Swagger
+
+Este projeto utiliza o **Swagger** para documentar e facilitar o uso da API. A documentação interativa permite testar os endpoints diretamente pelo navegador e visualizar todas as rotas disponíveis, suas descrições, parâmetros necessários e exemplos de requisições e respostas.
+
+## Acessando o Swagger
+
+Após iniciar o servidor da aplicação, você pode acessar a documentação do Swagger através do seguinte endereço:
+
+**URL:** [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+
+Se você estiver utilizando outra porta ou domínio, ajuste o URL de acordo.
+
+## Funcionalidades do Swagger
+
+- **Visualização Interativa:** Consulte a lista de endpoints da API e suas descrições detalhadas.
+- **Testes Diretos:** Envie requisições diretamente pelo navegador, sem necessidade de ferramentas externas.
+- **Exemplos de Requisições e Respostas:** Veja exemplos práticos para facilitar a integração com a API.
+- **Cabeçalhos de Autenticação:** Informe seu token JWT para acessar rotas protegidas diretamente pelo Swagger.
+
+## Autenticação e Controle de Acesso
+
+A API utiliza **JWT (JSON Web Token)** para autenticação. É necessário se autenticar para acessar as rotas protegidas da aplicação.
+
+Existem dois tipos de usuários na API:
+- **`STUDENT`**: Pode acessar apenas a rota `GET /cursos/`.
+- **`TEACHER`**: Pode acessar todas as rotas disponíveis na API.
+
+### Como enviar o token JWT
+Para acessar as rotas protegidas, você deve incluir o token JWT no cabeçalho da requisição:
+
+  ```http
+  Authorization: Bearer <seu_token_jwt>
+  ```
+
+### Endpoints de Autenticação
+
+**POST /teacher/auth**
+
+**POST /student/auth**
+
+### Exemplo
+
+Request:
+
+```json
+{
+  "email": "usuario@example.com",
+  "password": "sua_senha"
+}
+```
+
+Response:
+
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "expireAt": "2025-01-04T22:31:34.985Z"
+}
+```
+
 ## Funcionalidades
 
 - **Criação de um novo curso:**
