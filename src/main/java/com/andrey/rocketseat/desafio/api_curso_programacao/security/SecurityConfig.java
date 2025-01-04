@@ -23,19 +23,20 @@ public class SecurityConfig {
     @Autowired
     private SecurityFilterStudent securityFilterStudent;
 
+    @Autowired SecurityFilterTeacher securityFilterTeacher;
+
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.csrf((value) -> value.disable())
             .authorizeHttpRequests((auth) -> {
-                auth.requestMatchers("/cursos/{id}").permitAll()
-                        .requestMatchers("/cursos/{id}/{status}").permitAll()
-                        .requestMatchers("/student/register").permitAll()
+                auth.requestMatchers("/student/register").permitAll()
                         .requestMatchers("/student/auth").permitAll()
                         .requestMatchers("/teacher/register").permitAll()
                         .requestMatchers("/teacher/auth").permitAll()
                         .requestMatchers(SWAGGER_LIST).permitAll()
                         .anyRequest().authenticated();
-            }).addFilterBefore(securityFilterStudent, BasicAuthenticationFilter.class);
+            }).addFilterBefore(securityFilterStudent, BasicAuthenticationFilter.class)
+                .addFilterBefore(securityFilterTeacher, BasicAuthenticationFilter.class);
         
         return httpSecurity.build();
     }
