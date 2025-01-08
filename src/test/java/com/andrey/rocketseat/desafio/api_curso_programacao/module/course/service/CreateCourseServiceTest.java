@@ -1,6 +1,7 @@
 package com.andrey.rocketseat.desafio.api_curso_programacao.module.course.service;
 
 import com.andrey.rocketseat.desafio.api_curso_programacao.modules.course.CourseEntity;
+import com.andrey.rocketseat.desafio.api_curso_programacao.modules.course.dto.MessageReturnDTO;
 import com.andrey.rocketseat.desafio.api_curso_programacao.modules.course.repository.CourseRepository;
 import com.andrey.rocketseat.desafio.api_curso_programacao.modules.course.service.CreateCourseService;
 import org.junit.jupiter.api.DisplayName;
@@ -14,6 +15,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -41,5 +43,22 @@ public class CreateCourseServiceTest {
             assertEquals("Curso ja cadastrado!", e.getMessage());
             assertThat(e).isInstanceOf(IllegalArgumentException.class);
         }
+    }
+
+    @Test
+    @DisplayName("Should return instance of MessageReturnDTO class")
+    public void should_return_instance_of_MessageReturnDTO_class(){
+        CourseEntity courseEntity = new CourseEntity();
+        courseEntity.setName("NAME TEST");
+        courseEntity.setCategory("CATEGORY TEST");
+
+        when(this.courseRepository.save(courseEntity)).thenReturn(courseEntity);
+
+        var result = this.createCourseService.execute(courseEntity);
+
+        assertEquals("Curso cadastrado com sucesso!", result.getMessage());
+        assertThat(result).isInstanceOf(MessageReturnDTO.class);
+        assertThat(result).hasFieldOrProperty("object");
+        assertNotNull(result.getObject());
     }
 }
