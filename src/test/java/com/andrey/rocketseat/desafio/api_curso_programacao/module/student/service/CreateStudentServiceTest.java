@@ -11,10 +11,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
@@ -22,6 +24,9 @@ import static org.mockito.Mockito.when;
 public class CreateStudentServiceTest {
     @Mock
     private StudentRepository studentRepository;
+
+    @Mock
+    private PasswordEncoder passwordEncoder;
 
     @InjectMocks
     private CreateStudentService createStudentService;
@@ -42,6 +47,24 @@ public class CreateStudentServiceTest {
         } catch (Exception e) {
             assertThat(e).isInstanceOf(StudentFoundException.class);
         }
+
+    }
+
+    @Test
+    @DisplayName("Should return the student entity")
+    public void should_return_the_student_entity(){
+        CreateStudentDTO createStudentDTO = new CreateStudentDTO();
+        createStudentDTO.setPassword("PASSWORD TEST");
+
+        when(this.studentRepository.save(new StudentEntity())).thenReturn(new StudentEntity());
+
+        var result = this.createStudentService.execute(createStudentDTO);
+
+        assertThat(result).isInstanceOf(StudentEntity.class);
+        assertThat(result).hasFieldOrProperty("name");
+        assertThat(result).hasFieldOrProperty("username");
+        assertThat(result).hasFieldOrProperty("email");
+        assertThat(result).hasFieldOrProperty("password");
 
     }
 }
