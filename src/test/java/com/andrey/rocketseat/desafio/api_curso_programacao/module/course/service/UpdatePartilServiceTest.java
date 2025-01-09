@@ -47,7 +47,6 @@ public class UpdatePartilServiceTest {
 
         when(this.courseRepository.findById(id)).thenReturn(Optional.of(new CourseEntity()));
 
-
         when(this.courseRepository.save(any(CourseEntity.class))).thenReturn(new CourseEntity());
 
         CourseEntity result = this.updatePartilService.updatePartilService(id, Status.ATIVADO);
