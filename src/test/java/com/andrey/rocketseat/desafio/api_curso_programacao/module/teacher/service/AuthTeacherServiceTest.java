@@ -3,8 +3,10 @@ package com.andrey.rocketseat.desafio.api_curso_programacao.module.teacher.servi
 import com.andrey.rocketseat.desafio.api_curso_programacao.exception.TeacherNotFoundException;
 import com.andrey.rocketseat.desafio.api_curso_programacao.modules.teacher.TeacherEntity;
 import com.andrey.rocketseat.desafio.api_curso_programacao.modules.teacher.dto.AuthTeacherRequestDTO;
+import com.andrey.rocketseat.desafio.api_curso_programacao.modules.teacher.dto.AuthTeacherResponseDTO;
 import com.andrey.rocketseat.desafio.api_curso_programacao.modules.teacher.repository.TeacherRepository;
 import com.andrey.rocketseat.desafio.api_curso_programacao.modules.teacher.service.AuthTeacherService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,8 +14,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -32,6 +36,11 @@ public class AuthTeacherServiceTest {
 
     @InjectMocks
     private AuthTeacherService authTeacherService;
+
+    @BeforeEach
+    public void setup(){
+        ReflectionTestUtils.setField(authTeacherService, "secretKey", "secretTokenJwt");
+    }
 
     @Test
     @DisplayName("Should return that teacher was not found")
@@ -60,4 +69,26 @@ public class AuthTeacherServiceTest {
             assertEquals("A senha fornecida não esta correta.", e.getMessage());
         }
     }
+
+    @Test
+    @DisplayName("Should return DTO with token and time to expired")
+    public void should_return_dto_with_token_and_time_to_expired(){
+        AuthTeacherRequestDTO authTeacherRequestDTO = new AuthTeacherRequestDTO();
+        authTeacherRequestDTO.setEmail("emailTest@mail.com");
+
+        TeacherEntity teacher = new TeacherEntity();
+        teacher.setId(UUID.randomUUID());
+
+        when(this.teacherRepository.findByEmail(authTeacherRequestDTO.getEmail())).thenReturn(Optional.of(teacher));
+
+        when(this.passwordEncoder.matches(any(), any())).thenReturn(true);
+
+        var result = this.authTeacherService.execute(authTeacherRequestDTO);
+
+        assertThat(result).isInstanceOf(AuthTeacherResponseDTO.class);
+        assertThat(result).hasFieldOrProperty("token");
+        assertThat(result).hasFieldOrProperty("expireAt");
+
+    }
+
 }
