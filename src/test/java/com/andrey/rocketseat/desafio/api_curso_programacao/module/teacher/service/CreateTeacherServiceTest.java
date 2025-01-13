@@ -44,4 +44,22 @@ public class CreateTeacherServiceTest {
             assertEquals("Professor ja cadastrado.", e.getMessage());
         }
     }
+
+    @Test
+    @DisplayName("Should return the class entity TeacherEntity")
+    public void should_return_the_class_entity_teacherentity(){
+        CreateTeacherDTO createTeacherDTO = new CreateTeacherDTO();
+        createTeacherDTO.setPassword("PASSWORD TEST");
+
+        when(this.teacherRepository.save(new TeacherEntity())).thenReturn(new TeacherEntity());
+
+        var result = this.createTeacherService.execute(createTeacherDTO);
+
+        assertThat(result).isInstanceOf(TeacherEntity.class);
+        assertThat(result).hasFieldOrProperty("name");
+        assertThat(result).hasFieldOrProperty("username");
+        assertThat(result).hasFieldOrProperty("email");
+        assertThat(result).hasFieldOrProperty("password");
+
+    }
 }
