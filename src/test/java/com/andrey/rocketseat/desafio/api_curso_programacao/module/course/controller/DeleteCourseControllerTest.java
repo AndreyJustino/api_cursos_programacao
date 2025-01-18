@@ -64,4 +64,14 @@ public class DeleteCourseControllerTest {
                         .header("Authorization", GenerateTokenTeacher.execute(UUID.randomUUID()))
         ).andExpect(MockMvcResultMatchers.status().isOk());
     }
+
+    @Test
+    @DisplayName("Should return that course wasn't found")
+    public void should_return_that_course_was_not_found() throws Exception {
+        var result = mvc.perform(
+                MockMvcRequestBuilders.delete("/cursos/" + UUID.randomUUID().toString())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header("Authorization", GenerateTokenTeacher.execute(UUID.randomUUID()))
+        ).andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
 }
