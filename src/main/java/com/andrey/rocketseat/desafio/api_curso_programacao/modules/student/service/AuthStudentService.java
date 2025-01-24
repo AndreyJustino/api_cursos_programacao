@@ -50,11 +50,10 @@ public class AuthStudentService {
                 .withIssuer("AndreyJustino") //nome de quem assina
                 .sign(algorithm);
 
-        AuthStudentResponseDTO authStudentResponseDTO = AuthStudentResponseDTO.builder()
+        return AuthStudentResponseDTO.builder()
                 .token(token)
                 .expireAt(expireIn)
                 .build();
 
-        return authStudentResponseDTO;
     }
 }

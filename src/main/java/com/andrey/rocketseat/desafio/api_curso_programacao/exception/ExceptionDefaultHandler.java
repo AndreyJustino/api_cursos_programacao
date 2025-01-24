@@ -26,7 +26,7 @@ public class ExceptionDefaultHandler {
 
         List<ExceptionDefaultHandlerDTO> dto = new ArrayList<>();
 
-        e.getBindingResult().getFieldErrors().forEach((value) -> {
+        e.getBindingResult().getFieldErrors().forEach(value -> {
             String message = messageSource.getMessage(value, LocaleContextHolder.getLocale());
 
             ExceptionDefaultHandlerDTO exceptionDefaultHandlerDTO =

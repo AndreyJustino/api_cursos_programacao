@@ -40,7 +40,7 @@ public class AuthTeacherService {
 
         boolean password = passwordEncoder.matches(authTeacherRequestDTO.getPassword(), teacher.getPassword());
 
-        if (password == false){
+        if (!password){
             throw new IllegalArgumentException("A senha fornecida não esta correta.");
         }
 
@@ -54,12 +54,10 @@ public class AuthTeacherService {
                 .withExpiresAt(expireIn)
                 .sign(algorithm);
 
-        AuthTeacherResponseDTO authTeacherResponseDTO = AuthTeacherResponseDTO.builder()
+        return AuthTeacherResponseDTO.builder()
                 .token(token)
                 .expireAt(expireIn)
                 .build();
-
-        return authTeacherResponseDTO;
     }
 
 }

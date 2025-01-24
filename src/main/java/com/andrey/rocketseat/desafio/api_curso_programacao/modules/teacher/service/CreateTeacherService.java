@@ -21,7 +21,7 @@ public class CreateTeacherService {
 
         this.teacherRepository
                 .findByEmailOrUsername(createTeacherDTO.getEmail(), createTeacherDTO.getUsername())
-                    .ifPresent((value) -> {
+                    .ifPresent(value -> {
                         throw new TeacherFoundExecption();
                     });
 
@@ -34,8 +34,6 @@ public class CreateTeacherService {
                 .password(password)
                 .build();
 
-        TeacherEntity result = this.teacherRepository.save(teacherEntity);
-
-        return result;
+        return this.teacherRepository.save(teacherEntity);
     }
 }

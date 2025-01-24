@@ -18,7 +18,7 @@ public class CreateStudentService {
 
     public StudentEntity execute(CreateStudentDTO createStudentDTO){
         this.studentRepository.findByEmailOrUsername(createStudentDTO.getEmail(), createStudentDTO.getUsername())
-                .ifPresent((value) -> {
+                .ifPresent(value -> {
                     throw new StudentFoundException();
             }
         );
@@ -32,8 +32,6 @@ public class CreateStudentService {
                 .password(password)
                 .build();
 
-        StudentEntity result = this.studentRepository.save(student);
-
-        return result;
+        return this.studentRepository.save(student);
     }
 }

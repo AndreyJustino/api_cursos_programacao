@@ -15,18 +15,16 @@ public class CreateCourseService {
     public MessageReturnDTO execute(CourseEntity courseEntity){
 
         this.courseRepository.findByNameAndCategory(courseEntity.getName(), courseEntity.getCategory())
-                .ifPresent((value) -> {
+                .ifPresent(value -> {
                     throw new IllegalArgumentException("Curso ja cadastrado!");
                 });
 
         CourseEntity result = this.courseRepository.save(courseEntity);
 
-        MessageReturnDTO returnDTO = MessageReturnDTO.builder()
+        return MessageReturnDTO.builder()
                 .message("Curso cadastrado com sucesso!")
                 .object(result)
                 .build();
-
-        return returnDTO;
     }
 
 }
