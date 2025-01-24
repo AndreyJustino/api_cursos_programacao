@@ -38,7 +38,7 @@ public class UpdateCourseController {
             CourseEntity result = this.updateCourseService.execute(id, updateCourseDTO);
 
             MessageReturnDTO messageReturnDTO = MessageReturnDTO.builder()
-                    .message("Usuario atualizado com sucesso!")
+                    .message("Curso atualizado com sucesso!")
                     .object(result)
                     .build();
 
