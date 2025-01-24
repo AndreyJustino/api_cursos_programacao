@@ -39,7 +39,7 @@ public class UpdatePartilController {
             CourseEntity courseEntity = updatePartilService.updatePartilService(id, enumStatus);
 
             MessageReturnDTO messageReturnDTO = MessageReturnDTO.builder()
-                    .message("Statu do curso atualizado com sucesso!")
+                    .message("Status do curso atualizado com sucesso!")
                     .object(courseEntity)
                     .build();
 
