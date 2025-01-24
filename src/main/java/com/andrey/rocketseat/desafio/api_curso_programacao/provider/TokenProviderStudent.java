@@ -24,7 +24,6 @@ public class TokenProviderStudent {
             return jwt;
 
         } catch (Exception e) {
-            e.printStackTrace();
 
             return null;
         }

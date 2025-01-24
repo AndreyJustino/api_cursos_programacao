@@ -42,8 +42,6 @@ public class ExceptionDefaultHandler {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<String> httpMessageNotReadableException(HttpMessageNotReadableException e){
 
-        e.printStackTrace();
-
         return ResponseEntity.badRequest().body("O corpo da requisição está mal formatado ou contém dados inválidos.");
     }
 

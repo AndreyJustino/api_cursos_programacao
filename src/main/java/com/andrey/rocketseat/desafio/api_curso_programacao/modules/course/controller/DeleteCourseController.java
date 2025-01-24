@@ -39,7 +39,6 @@ public class DeleteCourseController {
             return ResponseEntity.ok().body("Curso deletado com sucesso!");
 
         } catch (Exception e) {
-            e.printStackTrace();
 
             return ResponseEntity.badRequest().body(e.getMessage());
         }

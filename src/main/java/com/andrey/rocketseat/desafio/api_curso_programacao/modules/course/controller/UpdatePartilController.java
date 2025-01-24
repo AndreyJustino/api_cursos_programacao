@@ -46,7 +46,6 @@ public class UpdatePartilController {
             return ResponseEntity.ok().body(messageReturnDTO);
 
         } catch (Exception e) {
-            e.printStackTrace();
 
             return ResponseEntity.badRequest().body(e.getMessage());
         }
